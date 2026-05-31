@@ -3,7 +3,7 @@
   "displayName": "PViz",
   "description": "Polyglot dependency analysis for your workspace. Generates LLM-optimized architecture bundles via the PViz CLI.",
   "version": "0.1.0",
-  "publisher": "pviz",
+  "publisher": "pvizgenerator",
   "license": "MIT",
   "repository": {
     "type": "git",
