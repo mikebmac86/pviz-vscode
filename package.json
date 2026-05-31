@@ -1,0 +1,94 @@
+{
+  "name": "pviz",
+  "displayName": "PViz",
+  "description": "Polyglot dependency analysis for your workspace. Generates LLM-optimized architecture bundles via the PViz CLI.",
+  "version": "0.1.0",
+  "publisher": "pviz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikebmac86/pviz-vscode"
+  },
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "dependency analysis",
+    "architecture",
+    "codebase",
+    "llm",
+    "polyglot"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pviz.analyze",
+        "title": "PViz: Analyze Workspace"
+      }
+    ],
+    "configuration": {
+      "title": "PViz",
+      "properties": {
+        "pviz.outputFile": {
+          "type": "string",
+          "default": ".pviz/artifacts/bundle.json",
+          "description": "Output JSON file for the generated PViz bundle. Relative paths are resolved from the workspace root. The extension automatically passes --allow-output-in-repo when the output file is inside the workspace."
+        },
+        "pviz.cliPath": {
+          "type": "string",
+          "default": "pviz",
+          "description": "Path to the PViz CLI executable. Defaults to 'pviz' (assumes it is on your PATH)."
+        },
+        "pviz.mode": {
+          "type": "string",
+          "enum": ["zones", "classic"],
+          "default": "zones",
+          "description": "PViz analyzer mode. 'zones' is recommended for most projects."
+        },
+        "pviz.maxBytes": {
+          "type": "number",
+          "default": 100000000,
+          "description": "Maximum bytes per file passed to PViz (default: 100MB)."
+        },
+        "pviz.storeRoot": {
+          "type": "string",
+          "default": "",
+          "description": "Optional external PViz store root. Leave empty to use the CLI default."
+        },
+        "pviz.clean": {
+          "type": "boolean",
+          "default": true,
+          "description": "Delete sandbox artifacts before analysis to avoid stale cross-repo reuse. Recommended to keep true."
+        },
+        "pviz.additionalArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Additional raw arguments passed to the PViz CLI."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.3.0"
+  }
+}
